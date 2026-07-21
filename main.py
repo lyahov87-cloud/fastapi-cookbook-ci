@@ -89,8 +89,7 @@ class RecipeDetailResponse(BaseModel):
 # ==========================================
 app = FastAPI(
     title="Кулинарная книга API",
-    description="Документация асинхронного сервиса кулинарных рецептов"
-                " для frontend-разработчиков.",
+    description="Документация асинхронного сервиса кулинарных рецептов" " для frontend-разработчиков.",
     version="1.0.0",
     lifespan=lifespan,
 )
@@ -102,7 +101,7 @@ app = FastAPI(
     status_code=201,
     summary="Создать новый рецепт",
     description="Принимает детальные данные рецепта, сохраняет в базу данных "
-                "и возвращает краткую информацию с присвоенным ID.",
+    "и возвращает краткую информацию с присвоенным ID.",
 )
 async def create_recipe(recipe: RecipeCreate, db: AsyncSession = Depends(get_db)) -> RecipeModel:
     # Объединяем список ингредиентов в одну текстовую строку для хранения в SQLite
@@ -125,7 +124,7 @@ async def create_recipe(recipe: RecipeCreate, db: AsyncSession = Depends(get_db)
     response_model=List[RecipeListResponse],
     summary="Получить список всех рецептов (Первый экран)",
     description="Возвращает рецепты, отсортированные по убыванию просмотров "
-                "(популярности). При равных просмотрах — сортирует по возрастанию времени.",
+    "(популярности). При равных просмотрах — сортирует по возрастанию времени.",
 )
 async def get_all_recipes(db: AsyncSession = Depends(get_db)) -> Any:
     # Сортировка по ТЗ: views_count DESC, cooking_time ASC
@@ -139,7 +138,7 @@ async def get_all_recipes(db: AsyncSession = Depends(get_db)) -> Any:
     response_model=RecipeDetailResponse,
     summary="Получить детальную информацию о рецепте (Второй экран)",
     description="Ищет рецепт по ID, увеличивает счётчик просмотров "
-                "(views_count) на 1 и отдаёт подробное описание с ингредиентами.",
+    "(views_count) на 1 и отдаёт подробное описание с ингредиентами.",
 )
 async def get_recipe_detail(recipe_id: int, db: AsyncSession = Depends(get_db)) -> RecipeDetailResponse:
     query = select(RecipeModel).where(RecipeModel.id == recipe_id)
